@@ -1,19 +1,21 @@
-Cell[][] grid;
 
-static final int COLS = 3;
-static final int ROWS = 3;
+Cell[][] grid; // Our game grid
 
-int player;
+static final int COLS = 3; // The number of colums
+static final int ROWS = 3; // The number of rows
+
+int player; // Variable to control witch player are playing
 
 void setup() {
   size(400, 400); 
   smooth();
 
-  grid = new Cell[COLS][ROWS];
+  grid = new Cell[COLS][ROWS]; // create our bidimensional array of Cells
 
-  int xscale = width/3;
-  int yscale = height/3;
+  int xscale = width/3; // set the scale to better locate the Cells in grid
+  int yscale = height/3; //  the same
 
+  // create the cells
   for (int i = 0; i < COLS; i++) {
     for (int j = 0; j < ROWS; j++) {
       grid[i][j] = new Cell(5 + i * xscale, 5 + j * yscale, 
@@ -24,7 +26,29 @@ void setup() {
 
 void draw() {
   background(255);
+  
+  // check if somebody won
+  checkVictory();
+  
+  // display the game
+  for (Cell[] row : grid) {
+    for (Cell c : row) {
+      c.display();
+    }
+  }
+}
 
+void checkVictory() {
+  /* That's a bit confusion part that i'm working on. But the thing is: 
+  The X's value is 9 and the O's value is 7. I choose these values because 
+  they * 3 are only divided by 1, 3 or themselves; So... if i check the sum
+  of a row and its more than 20 it has 3 markers (X or O) on that, and them
+  i need to check if the markers are the same. And i do that checking they
+  modulus by 3. If it's 0 and the sum of the row (or the colum, or the diagonal)
+  is 21 (O victory) or 27 (X victory)
+   I don't know if it's the best way, but it's the only one i found, so let
+  me know if you have a better idea.
+  */
   for (int i = 0; i < COLS; i++) {
     int sumcol = 0;
     int sumrow = 0;
@@ -52,12 +76,6 @@ void draw() {
     } else if (sumdg1 / 3 == 9 || sumdg2 / 3 == 9) {
       background(0, 0, 155, 100);
       noLoop();
-    }
-  }
-
-  for (Cell[] row : grid) {
-    for (Cell c : row) {
-      c.display();
     }
   }
 }
