@@ -45,7 +45,7 @@ void checkVictory() {
   of a row and its more than 20 it has 3 markers (X or O) on that, and them
   i need to check if the markers are the same. And i do that checking they
   modulus by 3. If it's 0 and the sum of the row (or the colum, or the diagonal)
-  is 21 (O victory) or 27 (X victory)
+  is 21, them O has won the game, whether the sum is 27, them X has won.
    I don't know if it's the best way, but it's the only one i found, so let
   me know if you have a better idea.
   */
